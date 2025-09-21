@@ -19,8 +19,6 @@ export default class PlaylistCards extends React.Component {
                             deleteListCallback={deleteListCallback}
                             loadListCallback={loadListCallback}
                             renameListCallback={renameListCallback}
-                            text = "bruh"
-                            
                         />
                     ))
                 }
