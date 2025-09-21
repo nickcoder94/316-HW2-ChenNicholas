@@ -78,7 +78,7 @@ export default class SongCard extends React.Component {
                 draggable="true"
             >
                 <span>{num}.&nbsp; </span>
-                <a href='https://www.youtube.com/watch?v=${song.youTubeId}'> 
+                <a href={`https://www.youtube.com/watch?v=${song.youTubeId}`}> 
                     <span style={{color: '#d0b96dff'}}> {song.title}&nbsp;</span>
                 </a>
 
