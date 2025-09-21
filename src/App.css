@@ -123,7 +123,7 @@ body {
 
 .selected-playlist-card {
   background-color: var(--swatch-accent);
-  color: white;
+  color: white
 }
 
 .unselected-playlist-card {
@@ -153,6 +153,10 @@ body {
   align-items: center;
   font-size: 24pt;
   height:20%;
+  padding: 20px;
+  margin: 10px;
+  background-color: var(--swatch-complement);
+  border-radius: 25px;
 }
 
 input {
