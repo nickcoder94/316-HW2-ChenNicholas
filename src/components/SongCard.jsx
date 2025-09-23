@@ -89,7 +89,13 @@ export default class SongCard extends React.Component {
                 <span style={{color: 'red'}}>
                    &nbsp;{song.artist}
                 </span>
-                
+
+                <input
+                    type="button"
+                    id={"delete-song-"+ num}
+                    className="card-button"
+                    value={"🗑"}
+                />
             </div>
         )
     }

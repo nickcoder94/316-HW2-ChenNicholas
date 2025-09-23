@@ -133,10 +133,11 @@ body {
 .card-button, .card-button-disabled {
   font-size:18pt;
   border-width: 0px;
-  float:right;
+  float: right;
   color: black;
   cursor: pointer;
 }
+
 
 .card-button:hover {
   cursor: pointer;
@@ -152,8 +153,8 @@ body {
   display:flex;
   align-items: center;
   font-size: 16pt;
-  height:15%;
-  padding: 10px;
+  height: 15%;
+  padding: 20px;
   margin: 10px;
   background-color: var(--swatch-complement);
   border-radius: 125px;
@@ -219,7 +220,7 @@ input {
   grid-template-columns: 30% 65%;
   grid-template-rows: 20% 20% 20% 20% 20%;
   gap: 10px 20px;
-  font-size: 32pt;
+  font-size: 24pt;
 }
 
 span {
