@@ -18,6 +18,7 @@ import SidebarHeading from './components/SidebarHeading.jsx';
 import SidebarList from './components/PlaylistCards.jsx';
 import SongCards from './components/SongCards.jsx';
 import Statusbar from './components/Statusbar.jsx';
+import addSong_Transaction from './transactions/addSong_Transaction.js';
 
 class App extends React.Component {
     constructor(props) {
@@ -235,6 +236,22 @@ class App extends React.Component {
         let transaction = new MoveSong_Transaction(this, start, end);
         this.tps.processTransaction(transaction);
     }
+
+    addSongTransaction = () => {
+        //Create song transaction
+        let transaction = new addSong_Transaction(this);
+        this.tps.processTransaction(transaction);
+        console.log("huh?");
+    }
+
+    addSong(initSong) {
+        let list = this.state.currentList;
+        let listLen = this.getPlaylistSize();
+        list.songs[listLen] = initSong;
+
+        this.setStateWithUpdatedList(list);
+    }
+
     // THIS FUNCTION BEGINS THE PROCESS OF PERFORMING AN UNDO
     undo = () => {
         if (this.tps.hasTransactionToUndo()) {
@@ -297,6 +314,7 @@ class App extends React.Component {
                     canUndo={canUndo}
                     canRedo={canRedo}
                     canClose={canClose} 
+                    addCallBack={this.addSongTransaction}
                     undoCallback={this.undo}
                     redoCallback={this.redo}
                     closeCallback={this.closeCurrentList}
