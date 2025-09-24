@@ -19,6 +19,7 @@ import SidebarList from './components/PlaylistCards.jsx';
 import SongCards from './components/SongCards.jsx';
 import Statusbar from './components/Statusbar.jsx';
 import addSong_Transaction from './transactions/addSong_Transaction.js';
+import deleteSong_Transaction from './transactions/deleteSong_Transaction.js';
 
 class App extends React.Component {
     constructor(props) {
@@ -241,7 +242,6 @@ class App extends React.Component {
         //Create song transaction
         let transaction = new addSong_Transaction(this);
         this.tps.processTransaction(transaction);
-        console.log("huh?");
     }
 
     addSong(initSong) {
@@ -251,6 +251,21 @@ class App extends React.Component {
 
         this.setStateWithUpdatedList(list);
     }
+
+    addDeleteSongTransaction = (songId) => {
+        let transaction = new deleteSong_Transaction(this,songId);
+        this.tps.processTransaction(transaction);
+
+    }
+
+    deleteSong(songId) {
+        let list = this.state.currentList;
+        list.songs.splice(songId,1);
+        console.log("heeeeee");
+
+        this.setStateWithUpdatedList(list);
+    }
+
 
     // THIS FUNCTION BEGINS THE PROCESS OF PERFORMING AN UNDO
     undo = () => {
@@ -321,7 +336,8 @@ class App extends React.Component {
                 />
                 <SongCards
                     currentList={this.state.currentList}
-                    moveSongCallback={this.addMoveSongTransaction} />
+                    moveSongCallback={this.addMoveSongTransaction}
+                    deleteSongCallback={this.addDeleteSongTransaction} />
                 <Statusbar 
                     currentList={this.state.currentList} />
                 <DeleteListModal
