@@ -78,14 +78,14 @@ export default class SongCard extends React.Component {
         return (
             <div
                 id={'song-' + num}
-                className={itemClass}
+                className={itemClass + " unselected-song-card"}
                 onDragStart={this.handleDragStart}
                 onDragOver={this.handleDragOver}
                 onDragEnter={this.handleDragEnter}
                 onDragLeave={this.handleDragLeave}
                 onDrop={this.handleDrop}
                 draggable="true"
-            >
+            >   
                 <span>{num}.&nbsp; </span>
                 <a href={`https://www.youtube.com/watch?v=${song.youTubeId}`}> 
                     <span style={{color: '#d0b96dff'}}> {song.title}&nbsp;</span>

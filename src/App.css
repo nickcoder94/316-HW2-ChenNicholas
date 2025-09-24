@@ -149,15 +149,24 @@ body {
   cursor: not-allowed;
 }
 
-.song-card, .song-card-dragged-to { 
+.song-card, .song-card-dragged-to, .unselected-song-card { 
   display:flex;
   align-items: center;
   font-size: 16pt;
   height: 15%;
   padding: 20px;
   margin: 10px;
-  background-color: var(--swatch-complement);
   border-radius: 125px;
+}
+
+.unselected-song-card {
+  background-color: var(--swatch-complement);
+}
+
+.unselected-song-card:hover {
+  cursor: pointer;
+  background-color: var(--swatch-contrast);
+  color: white;
 }
 
 input {
