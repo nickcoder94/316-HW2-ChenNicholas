@@ -20,7 +20,8 @@ export default class addSong_Transaction extends jsTPS_Transaction {
     }
 
     executeUndo() {
-        console.log("bleh");
+        let size = this.app.getPlaylistSize();
+        this.app.deleteSong(size-1);
     }
 
 }

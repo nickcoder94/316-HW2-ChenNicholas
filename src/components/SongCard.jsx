@@ -39,7 +39,7 @@ export default class SongCard extends React.Component {
     }
     handleDrop = (event) => {
         event.preventDefault();
-        let target = event.target;
+        let target = event.currentTarget;
         let targetId = target.id;
         targetId = targetId.substring(target.id.indexOf("-") + 1);
         let sourceId = event.dataTransfer.getData("song");
@@ -57,8 +57,10 @@ export default class SongCard extends React.Component {
     handleDeleteSong = (event) => {
         let songId = this.getItemNum() - 1;
         console.log("delete song id -> " + songId);
+        const {song} = this.props;
+        console.log(song);
         event.stopPropagation();
-        this.props.deleteSongCallback(songId);
+        this.props.deleteSongCallback(songId,song);
     }
 
     getItemNum = () => {

@@ -208,6 +208,17 @@ class App extends React.Component {
     getPlaylistSize = () => {
         return this.state.currentList.songs.length;
     }
+
+    getSongFromId(songId) {
+        let list = this.state.currentList; 
+        for (let i = 0; i<this.getPlaylistSize; i++){
+            if (list.songs[i].id === songId){
+                return list.songs[i];
+            }
+        }
+        return null;
+    }
+
     // THIS FUNCTION MOVES A SONG IN THE CURRENT LIST FROM
     // start TO end AND ADJUSTS ALL OTHER ITEMS ACCORDINGLY
     moveSong(start, end) {
@@ -252,8 +263,8 @@ class App extends React.Component {
         this.setStateWithUpdatedList(list);
     }
 
-    addDeleteSongTransaction = (songId) => {
-        let transaction = new deleteSong_Transaction(this,songId);
+    addDeleteSongTransaction = (songId,song) => {
+        let transaction = new deleteSong_Transaction(this,songId,song);
         this.tps.processTransaction(transaction);
 
     }
@@ -261,7 +272,6 @@ class App extends React.Component {
     deleteSong(songId) {
         let list = this.state.currentList;
         list.songs.splice(songId,1);
-        console.log("heeeeee");
 
         this.setStateWithUpdatedList(list);
     }
