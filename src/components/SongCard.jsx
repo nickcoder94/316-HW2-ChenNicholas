@@ -77,7 +77,8 @@ export default class SongCard extends React.Component {
         // this.setState({
         //     editActive: !this.state.editActive});
         const {song} = this.props;
-        this.props.editSongCallback(songId);
+        console.log(song);
+        this.props.editSongCallback(song);
     }
 
     getItemNum = () => {

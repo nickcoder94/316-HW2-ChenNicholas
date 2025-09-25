@@ -39,7 +39,8 @@ class App extends React.Component {
         this.state = {
             listKeyPairMarkedForDeletion : null,
             currentList : null,
-            sessionData : loadedSessionData
+            sessionData : loadedSessionData,
+            songToEdit : null
         }
     }
     sortKeyNamePairsByName = (keyNamePairs) => {
@@ -176,7 +177,8 @@ class App extends React.Component {
         this.setState(prevState => ({
             listKeyPairMarkedForDeletion : prevState.listKeyPairMarkedForDeletion,
             currentList: newCurrentList,
-            sessionData: this.state.sessionData
+            sessionData: this.state.sessionData,
+            songToEdit: prevState.songToEdit
         }), () => {
             // AN AFTER EFFECT IS THAT WE NEED TO MAKE SURE
             // THE TRANSACTION STACK IS CLEARED
@@ -188,7 +190,8 @@ class App extends React.Component {
         this.setState(prevState => ({
             listKeyPairMarkedForDeletion : prevState.listKeyPairMarkedForDeletion,
             currentList: null,
-            sessionData: this.state.sessionData
+            sessionData: this.state.sessionData,
+            songToEdit: prevState.songToEdit
         }), () => {
             // AN AFTER EFFECT IS THAT WE NEED TO MAKE SURE
             // THE TRANSACTION STACK IS CLEARED
@@ -199,7 +202,8 @@ class App extends React.Component {
         this.setState(prevState => ({
             listKeyPairMarkedForDeletion : prevState.listKeyPairMarkedForDeletion,
             currentList : list,
-            sessionData : this.state.sessionData
+            sessionData : this.state.sessionData,
+            songToEdit: prevState.songToEdit
         }), () => {
             // UPDATING THE LIST IN PERMANENT STORAGE
             // IS AN AFTER EFFECT
@@ -270,8 +274,17 @@ class App extends React.Component {
 
     }
 
-    addEditSongTransaction = (song) => { //here
-        this.showEditSongModal();
+    addEditSongTransaction = (initSong) => { //here
+        console.log(initSong);
+        this.setState(prevState => ({
+            currentList: prevState.currentList,
+            listKeyPairMarkedForDeletion: prevState.listKeyPairMarkedForDeletion,
+            sessionData: prevState.sessionData,
+            songToEdit: initSong
+        }), () => {
+            this.showEditSongModal();
+        });
+        
     }
 
     deleteSong(songId) {
@@ -304,7 +317,8 @@ class App extends React.Component {
         this.setState(prevState => ({
             currentList: prevState.currentList,
             listKeyPairMarkedForDeletion : keyPair,
-            sessionData: prevState.sessionData
+            sessionData: prevState.sessionData,
+            songToEdit: prevState.songToEdit
         }), () => {
             // PROMPT THE USER
             this.showDeleteListModal();
@@ -370,6 +384,7 @@ class App extends React.Component {
                     currentList={this.state.currentList} />
                 <EditSongModal
                     hideEditSongModalCallback={this.hideEditSongModal}
+                    editSong={this.state.songToEdit}
                 />
                 <DeleteListModal
                     listKeyPair={this.state.listKeyPairMarkedForDeletion}
