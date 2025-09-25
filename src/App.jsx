@@ -269,6 +269,10 @@ class App extends React.Component {
 
     }
 
+    addEditSongTransaction = () => {
+        this.showEditSongModal();
+    }
+
     deleteSong(songId) {
         let list = this.state.currentList;
         list.songs.splice(songId,1);
@@ -305,6 +309,12 @@ class App extends React.Component {
             this.showDeleteListModal();
         });
     }
+
+    showEditSongModal() {
+        let songModal = document.getElementById("edit-song-modal");
+        songModal.classList.add("is-visible");
+    }
+
     // THIS FUNCTION SHOWS THE MODAL FOR PROMPTING THE USER
     // TO SEE IF THEY REALLY WANT TO DELETE THE LIST
     showDeleteListModal() {
@@ -347,7 +357,9 @@ class App extends React.Component {
                 <SongCards
                     currentList={this.state.currentList}
                     moveSongCallback={this.addMoveSongTransaction}
-                    deleteSongCallback={this.addDeleteSongTransaction} />
+                    deleteSongCallback={this.addDeleteSongTransaction} 
+                    editSongCallback={this.addEditSongTransaction}
+                    />
                 <Statusbar 
                     currentList={this.state.currentList} />
                 <DeleteListModal

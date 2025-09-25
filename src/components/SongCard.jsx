@@ -6,7 +6,8 @@ export default class SongCard extends React.Component {
 
         this.state = {
             isDragging: false,
-            draggedTo: false
+            draggedTo: false,
+            editActive: false
         }
     }
     handleDragStart = (event) => {
@@ -63,6 +64,21 @@ export default class SongCard extends React.Component {
         this.props.deleteSongCallback(songId,song);
     }
 
+    handleClick = (event) => {
+        if (event.detail === 2){
+            this.handleToggleEdit(event);
+        }
+    }
+
+    handleToggleEdit = (event) => {
+        console.log("AHHHHHH");
+        event.stopPropagation();
+        // this.setState({
+        //     editActive: !this.state.editActive});
+        const {song} = this.props;
+        this.props.editSongCallback(song);
+    }
+
     getItemNum = () => {
         return this.props.id.substring("song-card-".length);
     }
@@ -79,6 +95,7 @@ export default class SongCard extends React.Component {
             <div
                 id={'song-' + num}
                 className={itemClass + " unselected-song-card"}
+                onClick={this.handleClick}
                 onDragStart={this.handleDragStart}
                 onDragOver={this.handleDragOver}
                 onDragEnter={this.handleDragEnter}
