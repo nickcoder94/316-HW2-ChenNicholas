@@ -270,7 +270,7 @@ class App extends React.Component {
 
     }
 
-    addEditSongTransaction = () => {
+    addEditSongTransaction = (song) => { //here
         this.showEditSongModal();
     }
 

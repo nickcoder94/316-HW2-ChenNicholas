@@ -73,10 +73,11 @@ export default class SongCard extends React.Component {
     handleToggleEdit = (event) => {
         console.log("AHHHHHH");
         event.stopPropagation();
+        let songId = this.getItemNum() - 1;
         // this.setState({
         //     editActive: !this.state.editActive});
         const {song} = this.props;
-        this.props.editSongCallback(song);
+        this.props.editSongCallback(songId);
     }
 
     getItemNum = () => {
@@ -119,7 +120,7 @@ export default class SongCard extends React.Component {
                 <input
                     type="button"
                     id={"delete-song-"+ num}
-                    className="card-button"
+                    className="song-card-button"
                     onClick={this.handleDeleteSong}
                     value={"🗑"}
                 />

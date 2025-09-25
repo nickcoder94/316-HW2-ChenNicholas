@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 export default class EditSongModal extends Component {
 
     render() {
-        const {hideEditSongModalCallback} = this.props;
+        const {editSong, hideEditSongModalCallback} = this.props;
         return (
             <div
                 class="modal"
@@ -18,7 +18,7 @@ export default class EditSongModal extends Component {
                             <input type="text"
                                 id="title-textfield"
                                 class="modal-textfield"
-                                value="Title" /> 
+                                value= "Title" /> 
                             Artist:
                             <input type="text"
                                 id="artist-textfield"
@@ -33,7 +33,7 @@ export default class EditSongModal extends Component {
                             <input type="text"
                                 id="youtubeId-textfield"
                                 class="modal-textfield"
-                                value="aaaaaaa" />
+                                value="abcdefgh" />
                         </div>
                         <div class="modal-south">
                             <input type="button"
