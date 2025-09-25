@@ -5,23 +5,26 @@ export default class addSong_Transaction extends jsTPS_Transaction {
     constructor(initApp){
         super();
         this.app = initApp;
+        this.newSong = null;
     }
     
 
     executeDo(){
-        let newSong = {
+        this.newSong = {
             title: "Untitled",
             year: 2000,
             artist: "???",
             youTubeId: "dQw4w9WgXcQ"
         };
 
-        this.app.addSong(newSong);
+        let len = this.app.getPlaylistSize();
+        this.app.addSong(this.newSong,len);
     }
 
     executeUndo() {
-        let size = this.app.getPlaylistSize();
-        this.app.deleteSong(size-1);
+        let len = this.app.getPlaylistSize();
+        this.app.deleteSong(len-1);
+        
     }
 
 }

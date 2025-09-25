@@ -173,6 +173,7 @@ class App extends React.Component {
     }
     // THIS FUNCTION BEGINS THE PROCESS OF LOADING A LIST FOR EDITING
     loadList = (key) => {
+        this.tps.clearAllTransactions();
         let newCurrentList = this.db.queryGetList(key);
         this.setState(prevState => ({
             listKeyPairMarkedForDeletion : prevState.listKeyPairMarkedForDeletion,
@@ -260,10 +261,10 @@ class App extends React.Component {
         this.tps.processTransaction(transaction);
     }
 
-    addSong(initSong) {
+    addSong(initSong,index) {
         let list = this.state.currentList;
-        let listLen = this.getPlaylistSize();
-        list.songs[listLen] = initSong;
+        list.songs.splice(index,0,initSong);
+        //console.log("added song -> " + initSong.title);
 
         this.setStateWithUpdatedList(list);
     }
@@ -289,8 +290,8 @@ class App extends React.Component {
 
     deleteSong(songId) {
         let list = this.state.currentList;
+        let s = list.songs[songId]
         list.songs.splice(songId,1);
-
         this.setStateWithUpdatedList(list);
     }
 
@@ -348,8 +349,16 @@ class App extends React.Component {
     }
     render() {
         let canAddSong = this.state.currentList !== null;
+
         let canUndo = this.tps.hasTransactionToUndo();
+            if (this.state.currentList === null){
+                canUndo = false;
+            }
+
         let canRedo = this.tps.hasTransactionToDo();
+            if (this.state.currentList === null){
+                canRedo = false;
+            }
         let canClose = this.state.currentList !== null;
         return (
             <div id="root">
