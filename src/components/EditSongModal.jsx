@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 export default class EditSongModal extends Component {
 
     render() {
+        const {hideEditSongModalCallback} = this.props;
         return (
             <div
                 class="modal"
@@ -13,7 +14,26 @@ export default class EditSongModal extends Component {
                             Edit Song
                         </div>
                         <div class="modal-center">
-                            BLAH BLAH BLAH BLAH BLAH
+                            Title:
+                            <input type="text"
+                                id="title-textfield"
+                                class="modal-textfield"
+                                value="Title" /> 
+                            Artist:
+                            <input type="text"
+                                id="artist-textfield"
+                                class="modal-textfield"
+                                value="artist" />
+                            Year:
+                            <input type="text"
+                                id="year-textfield"
+                                class="modal-textfield"
+                                value="year" />
+                            Youtube Id:
+                            <input type="text"
+                                id="youtubeId-textfield"
+                                class="modal-textfield"
+                                value="aaaaaaa" />
                         </div>
                         <div class="modal-south">
                             <input type="button"
@@ -23,6 +43,7 @@ export default class EditSongModal extends Component {
                             <input type="button"
                                 id="edit-song-cancel-button"
                                 class="modal-button"
+                                onClick={hideEditSongModalCallback}
                                 value="Cancel"/>
                         </div>
                     </div>

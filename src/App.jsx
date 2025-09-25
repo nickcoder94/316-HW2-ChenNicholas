@@ -10,6 +10,7 @@ import MoveSong_Transaction from './transactions/MoveSong_Transaction.js';
 
 // THESE REACT COMPONENTS ARE MODALS
 import DeleteListModal from './components/DeleteListModal.jsx';
+import EditSongModal from './components/EditSongModal.jsx';
 
 // THESE REACT COMPONENTS ARE IN OUR UI
 import Banner from './components/Banner.jsx';
@@ -315,6 +316,11 @@ class App extends React.Component {
         songModal.classList.add("is-visible");
     }
 
+    hideEditSongModal() {
+        let songModal = document.getElementById("edit-song-modal");
+        songModal.classList.remove("is-visible");
+    }
+
     // THIS FUNCTION SHOWS THE MODAL FOR PROMPTING THE USER
     // TO SEE IF THEY REALLY WANT TO DELETE THE LIST
     showDeleteListModal() {
@@ -359,9 +365,12 @@ class App extends React.Component {
                     moveSongCallback={this.addMoveSongTransaction}
                     deleteSongCallback={this.addDeleteSongTransaction} 
                     editSongCallback={this.addEditSongTransaction}
-                    />
+                />
                 <Statusbar 
                     currentList={this.state.currentList} />
+                <EditSongModal
+                    hideEditSongModalCallback={this.hideEditSongModal}
+                />
                 <DeleteListModal
                     listKeyPair={this.state.listKeyPairMarkedForDeletion}
                     hideDeleteListModalCallback={this.hideDeleteListModal}
