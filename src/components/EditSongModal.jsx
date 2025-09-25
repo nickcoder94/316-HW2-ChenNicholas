@@ -2,12 +2,21 @@ import React, { Component } from 'react';
 
 export default class EditSongModal extends Component {
     render() {
+
+        let title, artist, year, youTubeId;
         const {editSong, hideEditSongModalCallback} = this.props;
         if (editSong){
             console.log("yes" + editSong.title);
+            title = editSong.title;
+            artist = editSong.artist;
+            year = editSong.year;
+            youTubeId = editSong.youTubeId;
         }
         else {
-            console.log("no");
+            title = "Untitled";
+            artist = "???";
+            year = 2000;
+            youTubeId = "dQw4w9WgXcQ";
         }
         return (
             <div
@@ -23,22 +32,22 @@ export default class EditSongModal extends Component {
                             <input type="text"
                                 id="title-textfield"
                                 class="modal-textfield"
-                                value= {editSong.title} /> 
+                                value= {title} /> 
                             Artist:
                             <input type="text"
                                 id="artist-textfield"
                                 class="modal-textfield"
-                                value={editSong.artist} />
+                                value={artist} />
                             Year:
                             <input type="text"
                                 id="year-textfield"
                                 class="modal-textfield"
-                                value={editSong.year} />
+                                value={year} />
                             Youtube Id:
                             <input type="text"
                                 id="youtubeId-textfield"
                                 class="modal-textfield"
-                                value={editSong.youTubeId} />
+                                value={youTubeId} />
                         </div>
                         <div class="modal-south">
                             <input type="button"
