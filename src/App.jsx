@@ -22,6 +22,7 @@ import Statusbar from './components/Statusbar.jsx';
 import addSong_Transaction from './transactions/addSong_Transaction.js';
 import deleteSong_Transaction from './transactions/deleteSong_Transaction.js';
 import editSong_Transaction from './transactions/editSong_Transaction.js';
+import duplicateSong_Transaction from './transactions/duplicateSong_Transaction.js';
 
 class App extends React.Component {
     constructor(props) {
@@ -337,6 +338,13 @@ class App extends React.Component {
         this.setStateWithUpdatedList(list);
     }
 
+    addDuplicateSongTransaction = (initSong,id) => {
+        console.log("trans song " + initSong.title);
+        let transaction = new duplicateSong_Transaction(this, initSong,id);
+        this.tps.processTransaction(transaction);
+    }
+
+
 
     // THIS FUNCTION BEGINS THE PROCESS OF PERFORMING AN UNDO
     undo = () => {
@@ -431,6 +439,7 @@ class App extends React.Component {
                     moveSongCallback={this.addMoveSongTransaction}
                     deleteSongCallback={this.addDeleteSongTransaction} 
                     editSongCallback={this.markSongForEditting}
+                    duplicateSongCallback={this.addDuplicateSongTransaction}
                 />
                 <Statusbar 
                     currentList={this.state.currentList} />
