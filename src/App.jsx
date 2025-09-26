@@ -82,7 +82,8 @@ class App extends React.Component {
                 nextKey: prevState.sessionData.nextKey + 1,
                 counter: prevState.sessionData.counter + 1,
                 keyNamePairs: updatedPairs
-            }
+            },
+            songToEdit: prevState.songToEdit
         }), () => {
             // PUTTING THIS NEW LIST IN PERMANENT STORAGE
             // IS AN AFTER EFFECT
@@ -214,6 +215,43 @@ class App extends React.Component {
     }
     getPlaylistSize = () => {
         return this.state.currentList.songs.length;
+    }
+
+    duplicatePlaylist = (key,name) => {
+        console.log("BEFORE DUPLICATION ---> " + this.state.sessionData.nextKey)
+        let newPlaylistName = name + "(Copy)";
+        let newSongs = this.db.queryGetList(key);
+        let newKey = this.state.sessionData.nextKey;
+        console.log(newPlaylistName,newKey,newSongs.songs);
+        let newPlaylist = {
+            key: newKey,
+            name: newPlaylistName,
+            songs: newSongs.songs
+        };
+        console.log(newPlaylist);
+        console.log(this.state.sessionData.keyNamePairs);
+        //sort and add to playlists
+
+        let newKeyNamePair = { "key": newKey, "name": newPlaylistName };
+        let updatedPairs = [...this.state.sessionData.keyNamePairs,newKeyNamePair];
+        this.sortKeyNamePairsByName(updatedPairs);
+        console.log("new: " + newKeyNamePair.key, newKeyNamePair.name);
+        console.log("updated: " + updatedPairs);
+
+        this.setState(prevState => ({
+            listKeyPairMarkedForDeletion : prevState.listKeyPairMarkedForDeletion,
+            currentList: newPlaylist,
+            sessionData: {
+                nextKey: prevState.sessionData.nextKey + 1,
+                counter: prevState.sessionData.counter + 1,
+                keyNamePairs: updatedPairs
+            },
+            songToEdit: prevState.songToEdit
+        }), () => {
+            console.log(this.state.keyNamePairs);
+            this.db.mutationCreateList(newPlaylist);
+            this.db.mutationUpdateSessionData(this.state.sessionData);
+        });
     }
 
     getSongFromId(songId) {
@@ -376,6 +414,7 @@ class App extends React.Component {
                     deleteListCallback={this.markListForDeletion}
                     loadListCallback={this.loadList}
                     renameListCallback={this.renameList}
+                    duplicateListCallback={this.duplicatePlaylist}
                 />
                 <EditToolbar
                     canAddSong={canAddSong}
