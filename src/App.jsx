@@ -51,6 +51,15 @@ class App extends React.Component {
             return keyPair1.name.localeCompare(keyPair2.name);
         });
     }
+
+    canAddPlayList(){
+        if(this.state.currentList === null || this.state.currentList === undefined ) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
     // THIS FUNCTION BEGINS THE PROCESS OF CREATING A NEW LIST
     createNewList = () => {
         // FIRST FIGURE OUT WHAT THE NEW LIST'S KEY AND NAME WILL BE
@@ -415,6 +424,7 @@ class App extends React.Component {
                 <Banner />
                 <SidebarHeading
                     createNewListCallback={this.createNewList}
+                    canAddPlayList={this.canAddPlayList()}
                 />
                 <SidebarList
                     currentList={this.state.currentList}
