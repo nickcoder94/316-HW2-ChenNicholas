@@ -26,7 +26,8 @@ export default class editSong_Transaction extends jsTPS_Transaction {
     }
 
     executeUndo() {
-
+        let list = this.app.state.currentList;
+        list.songs.splice(this.song.id,1,song);
     }
 
     

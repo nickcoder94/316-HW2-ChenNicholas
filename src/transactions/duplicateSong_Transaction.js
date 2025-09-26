@@ -22,6 +22,7 @@ export default class duplicateSong_Transaction extends jsTPS_Transaction {
     }
 
     executeUndo(){
-        this.app.deleteSong(this.song.id+1);
+        console.log((this.ind))
+        this.app.deleteSong(this.ind);
     }
 }
