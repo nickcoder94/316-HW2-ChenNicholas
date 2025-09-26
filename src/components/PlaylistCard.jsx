@@ -88,6 +88,11 @@ export default class PlaylistCard extends React.Component {
                         className="playlist-card-button"
                         onClick={this.handleDeleteList}
                         value={"🗑"} />
+                    <input 
+                        type="button"
+                        id={"duplicate-list-" + keyNamePair.key}
+                        className="playlist-card-button"
+                        value={"⎘"}/>
                 </div>
             );
         }

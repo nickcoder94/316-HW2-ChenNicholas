@@ -119,11 +119,21 @@ export default class SongCard extends React.Component {
 
                 <input
                     type="button"
+                    id={"duplicate-song-" + num}
+                    className="song-card-button2"
+                    value={"⎘"} />
+
+                <input
+                    type="button"
                     id={"delete-song-"+ num}
                     className="song-card-button"
                     onClick={this.handleDeleteSong}
-                    value={"🗑"}
-                />
+                    value={"🗑"} />
+
+                
+                
+
+               
             </div>
         )
     }

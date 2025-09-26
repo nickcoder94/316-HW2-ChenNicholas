@@ -143,7 +143,7 @@ body {
 
 .playlist-card-button, .playlist-card-button-disabled {
   font-size:18pt;
-  border-width: 0px;
+  border-width: 1px;
   float:right;
   color: black;
   cursor: pointer;
@@ -151,12 +151,21 @@ body {
 
 .song-card-button, .song-card-button-disabled {
   font-size:18pt;
-  border-width: 0px;
-  margin-left: auto;
+  border-width: 1px;
+  margin-left: 0;
+  margin-right: 0;
   color: black;
   cursor: pointer;
 }
 
+.song-card-button2, .song-card-button2-disabled {
+  font-size:18pt;
+  border-width: 1px;
+  margin-left: auto;
+  margin-right: 0;
+  color: black;
+  cursor: pointer;
+}
 
 .card-button:hover {
   cursor: pointer;
