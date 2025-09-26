@@ -197,6 +197,8 @@ class App extends React.Component {
             // THE TRANSACTION STACK IS CLEARED
             this.tps.clearAllTransactions();
         });
+        this.catchUndo();
+        this.catchRedo();
     }
     // THIS FUNCTION BEGINS THE PROCESS OF CLOSING THE CURRENT LIST
     closeCurrentList = () => {
@@ -210,6 +212,8 @@ class App extends React.Component {
             // THE TRANSACTION STACK IS CLEARED
             this.tps.clearAllTransactions();
         });
+        this.dontCatchUndo();
+        this.dontCatchRedo();
     }
     setStateWithUpdatedList(list) {
         this.setState(prevState => ({
@@ -362,7 +366,9 @@ class App extends React.Component {
 
             // MAKE SURE THE LIST GETS PERMANENTLY UPDATED
             this.db.mutationUpdateList(this.state.currentList);
+            console.log("undid!");
         }
+        console.log("nothing undid...");
     }
     // THIS FUNCTION BEGINS THE PROCESS OF PERFORMING A REDO
     redo = () => {
@@ -371,8 +377,40 @@ class App extends React.Component {
 
             // MAKE SURE THE LIST GETS PERMANENTLY UPDATED
             this.db.mutationUpdateList(this.state.currentList);
+            console.log("did!");
+        }
+        console.log("nothing did...");
+    }
+
+    catchUndo() {
+        document.addEventListener("keydown",this.controlZ);
+    }
+    
+    dontCatchUndo() {
+        document.removeEventListener("keydown",this.controlZ);
+    }
+
+
+    catchRedo() {
+        document.addEventListener("keydown",this.controlY);
+    }
+
+    dontCatchRedo() {
+        document.removeEventListener("keydown",this.controlY);
+    }
+
+    controlY = (event) => {
+        if(event.ctrlKey && event.key === "y"){
+            this.redo();
         }
     }
+
+    controlZ = (event) => {
+        if (event.ctrlKey && event.key === "z") {
+            this.undo();
+        }
+    }
+
     markListForDeletion = (keyPair) => {
         this.setState(prevState => ({
             currentList: prevState.currentList,
