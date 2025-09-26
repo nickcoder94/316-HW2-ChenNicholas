@@ -71,7 +71,6 @@ export default class SongCard extends React.Component {
     }
 
     handleToggleEdit = (event) => {
-        console.log("AHHHHHH");
         event.stopPropagation();
         let songId = this.getItemNum() - 1;
         // this.setState({

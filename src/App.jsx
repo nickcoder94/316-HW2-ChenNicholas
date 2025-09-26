@@ -21,6 +21,7 @@ import SongCards from './components/SongCards.jsx';
 import Statusbar from './components/Statusbar.jsx';
 import addSong_Transaction from './transactions/addSong_Transaction.js';
 import deleteSong_Transaction from './transactions/deleteSong_Transaction.js';
+import editSong_Transaction from './transactions/editSong_Transaction.js';
 
 class App extends React.Component {
     constructor(props) {
@@ -275,8 +276,12 @@ class App extends React.Component {
 
     }
 
-    addEditSongTransaction = (initSong) => { //here
-        console.log(initSong);
+    addEditSongTransaction = (initSong,newTitle,newArtist,newYear,newYouTubeId) => { //here
+        let transaction = new editSong_Transaction(this,initSong,newTitle,newArtist,newYear,newYouTubeId);
+        this.tps.processTransaction(transaction);
+    }
+
+    markSongForEditting = (initSong) => {
         this.setState(prevState => ({
             currentList: prevState.currentList,
             listKeyPairMarkedForDeletion: prevState.listKeyPairMarkedForDeletion,
@@ -285,7 +290,6 @@ class App extends React.Component {
         }), () => {
             this.showEditSongModal();
         });
-        
     }
 
     deleteSong(songId) {
@@ -387,13 +391,14 @@ class App extends React.Component {
                     currentList={this.state.currentList}
                     moveSongCallback={this.addMoveSongTransaction}
                     deleteSongCallback={this.addDeleteSongTransaction} 
-                    editSongCallback={this.addEditSongTransaction}
+                    editSongCallback={this.markSongForEditting}
                 />
                 <Statusbar 
                     currentList={this.state.currentList} />
                 <EditSongModal
                     hideEditSongModalCallback={this.hideEditSongModal}
                     editSong={this.state.songToEdit}
+                    changeSong={this.addEditSongTransaction}
                 />
                 <DeleteListModal
                     listKeyPair={this.state.listKeyPairMarkedForDeletion}
